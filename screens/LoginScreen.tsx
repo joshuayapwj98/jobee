@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { View, Text } from '../components/Themed';
 import { TouchableOpacity, Image, Keyboard } from 'react-native'
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
@@ -10,52 +12,34 @@ import { nameValidator } from '../helpers/nameValidator'
 import { Platform, StyleSheet } from 'react-native'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Colors from '../constants/Colors'
-export default function RegisterScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
     const [name, setName] = useState({ value: '', error: '' })
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
 
-    const auth = getAuth();
-
-    const isLoggedIn = () => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                console.log('user is logged in');
-                navigation.navigate('Root');
-            }
-        });
-    };
-
-    const onSignUpPressed = async () => {
-        const nameError = nameValidator(name.value)
+    const onLoginPressed = async () => {
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
-        if (emailError || passwordError || nameError) {
-            setName({ ...name, error: nameError })
+        if (emailError || passwordError) {
+            console.log('here')
             setEmail({ ...email, error: emailError })
             setPassword({ ...password, error: passwordError })
             return
         }
-         await createUserWithEmailAndPassword(auth, email.value, password.value)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log("Created" + userCredential.user);
-                navigation.navigate('Root');
+        Keyboard.dismiss()
+        try {
+            const jsonValue = JSON.stringify({
+                name: name.value,
+                email: email.value,
+                password: password.value
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("Error" + errorCode + errorMessage);
-            });
+            await AsyncStorage.setItem('@storage_Key', jsonValue)
+        } catch (e) {
+            console.log(e)
+        }
+        navigation.navigate('Root') // Navigate to another screen for user data entry
     }
-
-    // useEffect(
-    //     isLoggedIn, // <- function that will run on every dependency update
-    //     [] // <-- empty dependency array
-    // )
 
     return (
         <View
@@ -64,16 +48,6 @@ export default function RegisterScreen({ navigation }) {
             <Text style={styles.title}>Welcome to <Text style={styles.brand}>JoBee</Text></Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Text style={styles.subtitle}>Swipe and apply for your dream job!</Text>
-            <TextInput
-                description=' '
-                label="Name"
-                returnKeyType="next"
-                value={name.value}
-                onChangeText={(text) => setName({ value: text, error: '' })}
-                error={!!name.error}
-                errorText={name.error}
-            />
-
             <TextInput
                 description=' '
                 label="Email"
@@ -100,15 +74,15 @@ export default function RegisterScreen({ navigation }) {
             />
             <Button
                 mode="contained"
-                onPress={onSignUpPressed}
+                onPress={onLoginPressed}
                 style={{ marginTop: 24 }}
             >
-                Signup
+                Login
             </Button>
             <View style={styles.row}>
-                <Text>Already have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.link}>Login</Text>
+                <Text>Don't have an account? </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                    <Text style={styles.link}>Register</Text>
                 </TouchableOpacity>
             </View>
         </View>

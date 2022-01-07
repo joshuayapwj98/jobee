@@ -19,7 +19,8 @@ export default {
   input: {
     text: '#000000',
     primary: '#FCC603',
-    secondary: '#414757',
+    secondary: '#560CCE',
     error: '#f13a59',
+    link: '#414757'
   }
 };
