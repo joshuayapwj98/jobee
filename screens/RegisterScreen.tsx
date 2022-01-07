@@ -1,21 +1,24 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Text } from '../components/Themed';
-import { Button, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Image, Keyboard } from 'react-native'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native'
 import TextInput from '../components/TextInput'
+import Button from '../components/Button'
 
 export default function RegisterScreen({ navigation }) {
     const [name, setName] = useState({ value: '', error: '' })
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
 
-    const onSignUpPressed = () => {
+    const onSignUpPressed = async () => {
         const nameError = nameValidator(name.value)
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
@@ -26,22 +29,33 @@ export default function RegisterScreen({ navigation }) {
             return
         }
         Keyboard.dismiss()
+        try {
+            const jsonValue = JSON.stringify({
+                name: name.value,
+                email: email.value,
+                password: password.value
+            })
+            await AsyncStorage.setItem('@storage_Key', jsonValue)
+          } catch (e) {
+            console.log(e)
+          }
         navigation.navigate('Root') // Navigate to another screen for user data entry
     }
 
     return (
-        <TouchableWithoutFeedback
-            onPress={() => {
-                Keyboard.dismiss()
-            }}
-        >
+        // <TouchableWithoutFeedback
+        //     onPress={() => {
+        //         Keyboard.dismiss()
+        //     }}
+        // >
         <View
             style={styles.container}>
-            <Text style={styles.title}>Welcome to JoBee</Text>
+            <Image source={require('../assets/images/JOBEE.png')} style={{ width: 220, height: 220 }} resizeMode='contain' />
+            <Text style={styles.title}>Welcome to <Text style={styles.brand}>JoBee</Text></Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Text style={styles.subtitle}>Swipe and apply for your dream job!</Text>
-
             <TextInput
+                description=' '
                 label="Name"
                 returnKeyType="next"
                 value={name.value}
@@ -51,6 +65,7 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <TextInput
+                description=' '
                 label="Email"
                 returnKeyType="next"
                 value={email.value}
@@ -64,6 +79,7 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <TextInput
+                description=' '
                 label="Password"
                 returnKeyType="done"
                 value={password.value}
@@ -72,11 +88,15 @@ export default function RegisterScreen({ navigation }) {
                 errorText={password.error}
                 secureTextEntry
             />
-
-            <Button title="Go to Details"
-                onPress={onSignUpPressed} />
+            <Button
+                mode="contained"
+                onPress={onSignUpPressed}
+                style={{ marginTop: 24 }}
+            >
+                Signup
+            </Button>
         </View>
-        </TouchableWithoutFeedback>
+        // </TouchableWithoutFeedback>
     );
 }
 
@@ -84,7 +104,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 50
     },
     title: {
         fontSize: 20,
@@ -97,8 +116,11 @@ const styles = StyleSheet.create({
         paddingRight: 5
     },
     separator: {
-        marginVertical: 30,
+        marginVertical: 5,
         height: 1,
         width: '80%',
     },
+    brand: {
+        color: '#FCC603'
+    }
 });
