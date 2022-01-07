@@ -10,15 +10,15 @@ export default {
     tabIconSelected: tintColorLight,
   },
   dark: {
-    text: '#fff',
-    background: '#000',
-    tint: tintColorDark,
+    text: '#000',
+    background: '#fff',
+    tint: tintColorLight,
     tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
+    tabIconSelected: tintColorLight,
   },
   input: {
     text: '#000000',
-    primary: '#560CCE',
+    primary: '#FCC603',
     secondary: '#414757',
     error: '#f13a59',
   }

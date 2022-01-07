@@ -15,9 +15,12 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@react-native-picker/picker": "^2.2.1",
+    "@react-native-async-storage/async-storage": "^1.15.14",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "dangerzone": "^1.0.1",
     "expo": "~44.0.0",
     "expo-asset": "~8.4.4",
     "expo-constants": "~13.0.0",
@@ -30,11 +33,15 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-multiple-select": "^0.5.7",
     "react-native-paper": "^4.11.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
+    "react-scripts": "^5.0.0",
+    "react-native-select-dropdown": "^1.7.0",
     "react-native-web": "0.17.1",
-    "react-scripts": "^5.0.0"
+    "react-spring": "^8.0.27",
+    "react-tinder-card": "^1.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Text } from '../components/Themed';
-import { Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Image, Keyboard } from 'react-native'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native'
 import TextInput from '../components/TextInput'
+import Button from '../components/Button'
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -61,11 +62,14 @@ export default function RegisterScreen({ navigation }) {
     // )
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Registration</Text>
+        <View
+            style={styles.container}>
+            <Image source={require('../assets/images/JOBEE.png')} style={{ width: 150, height: 150 }} resizeMode='contain' />
+            <Text style={styles.title}>Welcome to <Text style={styles.brand}>JoBee</Text></Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-
+            <Text style={styles.subtitle}>Swipe and apply for your dream job!</Text>
             <TextInput
+                description=' '
                 label="Name"
                 returnKeyType="next"
                 value={name.value}
@@ -75,6 +79,7 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <TextInput
+                description=' '
                 label="Email"
                 returnKeyType="next"
                 value={email.value}
@@ -88,6 +93,7 @@ export default function RegisterScreen({ navigation }) {
             />
 
             <TextInput
+                description=' '
                 label="Password"
                 returnKeyType="done"
                 value={password.value}
@@ -96,9 +102,13 @@ export default function RegisterScreen({ navigation }) {
                 errorText={password.error}
                 secureTextEntry
             />
-
-            <Button title="Go to Details"
-                onPress={onSignUpPressed} />
+            <Button
+                mode="contained"
+                onPress={onSignUpPressed}
+                style={{ marginTop: 24 }}
+            >
+                Signup
+            </Button>
         </View>
     );
 }
@@ -107,15 +117,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
     },
+    subtitle: {
+        fontSize: 15,
+        textAlign: 'center',
+        paddingLeft: 5,
+        paddingRight: 5
+    },
     separator: {
-        marginVertical: 30,
+        marginVertical: 5,
         height: 1,
         width: '80%',
     },
+    brand: {
+        color: '#FCC603'
+    }
 });

@@ -8,7 +8,7 @@ export default function TextInput({ errorText, description, ...props }) {
     <View style={styles.container}>
       <Input
         style={styles.input}
-        selectionColor={Colors.input.primary}
+        selectionColor={Colors.input.secondary}
         underlineColor="transparent"
         mode="outlined"
         {...props}
@@ -23,7 +23,7 @@ export default function TextInput({ errorText, description, ...props }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '50%',
+    width: '70%',
     marginVertical: 12,
   },
   input: {
