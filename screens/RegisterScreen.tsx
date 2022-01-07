@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { View, Text } from '../components/Themed';
 import { Image, Keyboard } from 'react-native'
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
