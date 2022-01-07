@@ -4,22 +4,19 @@ import { StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import { useEffect, useState } from 'react';
+import CarouselCards from '../components/CarouselCards'
+import Carousel from 'react-native-snap-carousel';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   const [text, onChangeText] = React.useState("Useless Text");
-
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
       <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          value={text}
-          onChangeText={onChangeText}
-        />
+        <CarouselCards />
       </SafeAreaView>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
     </View>
   );
 }
