@@ -13,17 +13,16 @@ import { Platform, StyleSheet } from 'react-native'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
 import Colors from '../constants/Colors'
-export default function RegisterScreen({ navigation }) {
+export default function SignInScreen({ navigation }) {
     const [name, setName] = useState({ value: '', error: '' })
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
 
-    const onSignUpPressed = async () => {
-        const nameError = nameValidator(name.value)
+    const onLoginPressed = async () => {
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
-        if (emailError || passwordError || nameError) {
-            setName({ ...name, error: nameError })
+        if (emailError || passwordError) {
+            console.log('here')
             setEmail({ ...email, error: emailError })
             setPassword({ ...password, error: passwordError })
             return
@@ -51,16 +50,6 @@ export default function RegisterScreen({ navigation }) {
             <Text style={styles.subtitle}>Swipe and apply for your dream job!</Text>
             <TextInput
                 description=' '
-                label="Name"
-                returnKeyType="next"
-                value={name.value}
-                onChangeText={(text) => setName({ value: text, error: '' })}
-                error={!!name.error}
-                errorText={name.error}
-            />
-
-            <TextInput
-                description=' '
                 label="Email"
                 returnKeyType="next"
                 value={email.value}
@@ -85,15 +74,15 @@ export default function RegisterScreen({ navigation }) {
             />
             <Button
                 mode="contained"
-                onPress={onSignUpPressed}
+                onPress={onLoginPressed}
                 style={{ marginTop: 24 }}
             >
-                Signup
+                Login
             </Button>
             <View style={styles.row}>
-                <Text>Already have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.link}>Login</Text>
+                <Text>Don't have an account? </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                    <Text style={styles.link}>Register</Text>
                 </TouchableOpacity>
             </View>
         </View>
