@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Text } from '../components/Themed';
-import { Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button, Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
@@ -27,13 +25,21 @@ export default function RegisterScreen({ navigation }) {
             setPassword({ ...password, error: passwordError })
             return
         }
-        navigation.navigate('Root')
+        Keyboard.dismiss()
+        navigation.navigate('Root') // Navigate to another screen for user data entry
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Registration</Text>
+        <TouchableWithoutFeedback
+            onPress={() => {
+                Keyboard.dismiss()
+            }}
+        >
+        <View
+            style={styles.container}>
+            <Text style={styles.title}>Welcome to JoBee</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <Text style={styles.subtitle}>Swipe and apply for your dream job!</Text>
 
             <TextInput
                 label="Name"
@@ -70,6 +76,7 @@ export default function RegisterScreen({ navigation }) {
             <Button title="Go to Details"
                 onPress={onSignUpPressed} />
         </View>
+        </TouchableWithoutFeedback>
     );
 }
 
@@ -77,11 +84,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: 50
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+    },
+    subtitle: {
+        fontSize: 15,
+        textAlign: 'center',
+        paddingLeft: 5,
+        paddingRight: 5
     },
     separator: {
         marginVertical: 30,
