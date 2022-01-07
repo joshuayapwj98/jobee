@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, Dimensions } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { View } from '../components/Themed';
+import { StatusBar } from 'expo-status-bar';
+import { Platform, StyleSheet } from 'react-native';
+import { Button, Card, Paragraph } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View } from '../components/Themed';
 
 export default function JobProfile() {
 
@@ -14,10 +14,9 @@ export default function JobProfile() {
                     <Card.Title title="Company Name" subtitle="Position Name" />
                     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                     <Card.Content>
-                        <Paragraph>
-                            Insert details
-                            hihiiiii
-                        </Paragraph>
+                        <Button>
+                            hello
+                    </Button>
                     </Card.Content>
                     <Card.Actions>
                         <Button>Cancel</Button>
@@ -32,9 +31,10 @@ export default function JobProfile() {
     );
 }
 
+
 const styles = StyleSheet.create({
     containcard: {
-        width: '50%'
+        width: '50%',
     },
     safe: {
         flex: 1

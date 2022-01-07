@@ -1,17 +1,37 @@
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+// import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import JobProfile from '../components/JobProfile';
+// import JobProfile from '../components/JobProfile';
+import Card from '../components/Card'
+import SelectDropdown from 'react-native-select-dropdown'
+// import MultiSelect from 'react-native-multiple-select';
 
 export default function TabTwoScreen() {
+  const listing = ["All", "SWE Intern", "Frontend Human", "DevOps"];
+  const [selectedListing, selectListing] = useState([]);
+
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.title}>Company Name - Position Name</Text>
+        <SelectDropdown
+          data={listing}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index)
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            return item
+          }}
+          defaultButtonText="Choose a listing"
+          buttonStyle={{ width: '50%' }}
+        />
       </View>
       <View style={{ margin: 10, width: "90%", height: "80%" }}>
-        <JobProfile></JobProfile>
+        <Card></Card>
       </View>
     </View>
   );
