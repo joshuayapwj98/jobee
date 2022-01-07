@@ -12,12 +12,26 @@ import { nameValidator } from '../helpers/nameValidator'
 import { Platform, StyleSheet } from 'react-native';
 import TextInput from '../components/TextInput'
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+
 export default function RegisterScreen({ navigation }) {
     const [name, setName] = useState({ value: '', error: '' })
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
 
-    const onSignUpPressed = () => {
+    const auth = getAuth();
+
+    const isLoggedIn = () => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log('user is logged in');
+                navigation.navigate('Root');
+            }
+        });
+    };
+
+    const onSignUpPressed = async () => {
         const nameError = nameValidator(name.value)
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
@@ -27,8 +41,24 @@ export default function RegisterScreen({ navigation }) {
             setPassword({ ...password, error: passwordError })
             return
         }
-        navigation.navigate('Root')
+         await createUserWithEmailAndPassword(auth, email.value, password.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("Created" + userCredential.user);
+                navigation.navigate('Root');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("Error" + errorCode + errorMessage);
+            });
     }
+
+    // useEffect(
+    //     isLoggedIn, // <- function that will run on every dependency update
+    //     [] // <-- empty dependency array
+    // )
 
     return (
         <View style={styles.container}>
