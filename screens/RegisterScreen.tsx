@@ -32,24 +32,25 @@ export default function RegisterScreen({ navigation }) {
         const nameError = nameValidator(name.value)
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
-        if (emailError || passwordError || nameError) {
-            setName({ ...name, error: nameError })
-            setEmail({ ...email, error: emailError })
-            setPassword({ ...password, error: passwordError })
-            return
-        }
-         await createUserWithEmailAndPassword(auth, email.value, password.value)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log("Created" + userCredential.user);
-                navigation.navigate('Root');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("Error" + errorCode + errorMessage);
-            });
+        navigation.navigate('Root');
+        // if (emailError || passwordError || nameError) {
+        //     setName({ ...name, error: nameError })
+        //     setEmail({ ...email, error: emailError })
+        //     setPassword({ ...password, error: passwordError })
+        //     return
+        // }
+        //  await createUserWithEmailAndPassword(auth, email.value, password.value)
+        //     .then((userCredential) => {
+        //         // Signed in 
+        //         const user = userCredential.user;
+        //         console.log("Created" + userCredential.user);
+        //         navigation.navigate('Root');
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.log("Error" + errorCode + errorMessage);
+        //     });
     }
 
     // useEffect(
