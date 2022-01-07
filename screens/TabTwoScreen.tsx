@@ -3,14 +3,13 @@ import { StyleSheet } from 'react-native';
 
 // import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-// import JobProfile from '../components/JobProfile';
-import Card from '../components/Card'
+import JobProfile from '../components/JobProfile';
+// import Card from '../components/Card'
 import SelectDropdown from 'react-native-select-dropdown'
 // import MultiSelect from 'react-native-multiple-select';
 
 export default function TabTwoScreen() {
   const listing = ["All", "SWE Intern", "Frontend Human", "DevOps"];
-  const [selectedListing, selectListing] = useState([]);
 
   return (
     <View style={styles.container}>
@@ -30,18 +29,22 @@ export default function TabTwoScreen() {
           buttonStyle={{ width: '50%' }}
         />
       </View>
-      <View style={{ margin: 10, width: "90%", height: "80%" }}>
-        <Card></Card>
+      <View>
+        {/* //style={{
+        //   alignSelf: "center",
+        //   width: "80%",
+        //   backgroundColor: "powderblue",
+        // }}> */}
+        < JobProfile />
       </View>
-    </View>
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    // justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 20,
@@ -54,4 +57,7 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  // card: {
+  //   width: 200
+  // }
 });
