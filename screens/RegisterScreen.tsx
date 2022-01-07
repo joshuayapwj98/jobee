@@ -43,14 +43,9 @@ export default function RegisterScreen({ navigation }) {
     }
 
     return (
-        // <TouchableWithoutFeedback
-        //     onPress={() => {
-        //         Keyboard.dismiss()
-        //     }}
-        // >
         <View
             style={styles.container}>
-            <Image source={require('../assets/images/JOBEE.png')} style={{ width: 220, height: 220 }} resizeMode='contain' />
+            <Image source={require('../assets/images/JOBEE.png')} style={{ width: 150, height: 150 }} resizeMode='contain' />
             <Text style={styles.title}>Welcome to <Text style={styles.brand}>JoBee</Text></Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Text style={styles.subtitle}>Swipe and apply for your dream job!</Text>
@@ -96,7 +91,6 @@ export default function RegisterScreen({ navigation }) {
                 Signup
             </Button>
         </View>
-        // </TouchableWithoutFeedback>
     );
 }
 
