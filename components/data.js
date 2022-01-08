@@ -30,7 +30,7 @@ export default data = [
     id: 3,
     title: "GovTech Singapore",
     position: "Agile Software Engineer Intern",
-    body: "The Government Technology Agency (GovTech) aims to transform the delivery of Government digital services by taking an outside-in view, putting citizens and businesses at the heart of everything we do. We also develop the Smart Nation infrastructure and applications, and facilitate collaboration with citizens and businesses to co-develop technologies.",
+    body: "The Government Technology Agency (GovTech) aims to transform the delivery of Government digital services by taking an outside-in view, putting citizens and businesses at the heart of everything we do. We also develop the Smart Nation infrastructure and applications, and facilitate collaboration to co-develop technologies.",
     require: [
       "Studying Computer Science, Information Systems or related fields.",
       "Passionate for coding and eager to learn.",
@@ -40,5 +40,18 @@ export default data = [
     ],
     imgUrl: "https://yt3.ggpht.com/ytc/AKedOLQ1enNdZ96RlDm3NTSFLvfwUQDD8UAtAwXhevBpOw=s900-c-k-c0x00ffffff-no-rj",
     status: "Applied"
-  }
+  },
+  {
+    id: 4,
+    title: "Handbook",
+    position: "Frontend Developer Intern",
+    body: "Together, we build products for everyone. Want to be a Handbookler? Find your team",
+    require: [
+      "Currently pursuing a Bachelor's or Master's degree in Computer Science, Information Security or a related technical field (e.g. engineering, mathematics, information systems, security etc).",
+      "Coding experience with one or more of the following languages: Python, Go, C++, JavaScript.",
+      "Experience with attacks and mitigation methods, with experience in network protocols and secure network design."
+    ],
+    imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvDr_yjYApP6qbTsSadY8o5yzzwakTjXNUBQ&usqp=CAU",
+    status: "Applied"
+  },
 ]

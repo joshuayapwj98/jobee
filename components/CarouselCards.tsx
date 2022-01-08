@@ -9,7 +9,6 @@ const CarouselCards = () => {
   const [index, setIndex] = React.useState(0)
   const isCarousel = React.useRef(null)
 
-
   return (
     <View>
       <Carousel
@@ -42,6 +41,7 @@ const CarouselCards = () => {
 
   )
 }
+
 
 
 export default CarouselCards
