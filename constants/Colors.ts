@@ -21,6 +21,7 @@ export default {
     primary: '#FCC603',
     secondary: '#560CCE',
     error: '#f13a59',
-    link: '#414757'
+    link: '#414757',
+    success: 'green'
   }
 };

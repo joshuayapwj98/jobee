@@ -74,7 +74,6 @@ function BottomTabNavigator({ navigation }) {
   }
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
@@ -82,8 +81,8 @@ function BottomTabNavigator({ navigation }) {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="address-card" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => signOut()}
@@ -101,8 +100,8 @@ function BottomTabNavigator({ navigation }) {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
         }}
       />
     </BottomTab.Navigator>
