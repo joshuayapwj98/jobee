@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-
+import { SectionList, StyleSheet } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 // import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-// import JobProfile from '../components/JobProfile';
-import Card from '../components/Card'
-import SelectDropdown from 'react-native-select-dropdown'
-// import MultiSelect from 'react-native-multiple-select';
 
 export default function TabTwoScreen() {
-  const listing = ["All", "SWE Intern", "Frontend Human", "DevOps"];
   const [selectedListing, selectListing] = useState([]);
-
+  const getIcon = () => {
+    return Math.random() < 0.5 ? 'times' : 'check'
+  }
   return (
     <View style={styles.container}>
-
-      {/* <View style={{ margin: 10, width: "90%", height: "80%" }}> */}
-      <View>
-      </View>
+      <SectionList
+        sections={[
+          { title: 'A', data: ['Apple', 'Ant Group', 'Accenture', 'Adobe'] },
+          { title: 'M', data: ['Microsoft'] },
+          { title: 'I', data: ['IBM'] },
+        ]}
+        renderItem={({ item }) =>
+          <View style={styles.viewItem}>
+            <Text style={styles.item}>{item}</Text>
+            <FontAwesome
+              style={styles.icon}
+              name={getIcon()}
+              color='grey'
+              size={40}
+            />
+          </View>}
+        renderSectionHeader={({ section }) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+        keyExtractor={(item, index) => index}
+      />
     </View>
   );
 }
@@ -25,8 +37,7 @@ export default function TabTwoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    // justifyContent: 'center',
+    paddingTop: 22
   },
   title: {
     fontSize: 20,
@@ -39,4 +50,29 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  item: {
+    padding: 30,
+    marginVertical: 0.5,
+    fontSize: 18,
+    height: 80,
+  },
+  sectionHeader: {
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 2,
+    fontSize: 14,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247,247,247,1.0)',
+  },
+  viewItem: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#F8F8F8',
+  },
+  icon: {
+    position: 'absolute',
+    right: 50,
+    top: 15
+  }
 });
