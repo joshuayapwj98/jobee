@@ -14,24 +14,9 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.title}>
-        <SelectDropdown
-          data={listing}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem
-          }}
-          rowTextForSelection={(item, index) => {
-            return item
-          }}
-          defaultButtonText="Choose a listing"
-          buttonStyle={{ width: '50%' }}
-        />
-      </View>
-      <View style={{ margin: 10, width: "90%", height: "80%" }}>
-        <Card></Card>
+
+      {/* <View style={{ margin: 10, width: "90%", height: "80%" }}> */}
+      <View>
       </View>
     </View>
   );
