@@ -68,7 +68,6 @@ function BottomTabNavigator({ navigation }) {
   const signOut = async () => {
     const auth = getAuth();
     await auth.signOut().then(() => {
-      console.log('Sign out user')
       navigation.navigate('Register')
     });
 
@@ -92,7 +91,7 @@ function BottomTabNavigator({ navigation }) {
                 opacity: pressed ? 0.5 : 1,
               })}>
               <Ionicons name="exit-outline" size={25}
-                color={Colors[colorScheme].text}
+                color="#FFFFFF"
                 style={{ marginRight: 15 }}/>
             </Pressable>
           ),

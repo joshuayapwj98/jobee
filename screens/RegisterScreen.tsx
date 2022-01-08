@@ -24,9 +24,10 @@ export default function RegisterScreen({ navigation }) {
         auth.onAuthStateChanged((user) => {
             setLoading(false)
             if (user) {
-                console.log('user is logged in');
+                setLoading(false);
                 navigation.navigate('Root');
             }
+            setLoading(false);
         });
     };
 
@@ -34,25 +35,23 @@ export default function RegisterScreen({ navigation }) {
         const nameError = nameValidator(name.value)
         const emailError = emailValidator(email.value)
         const passwordError = passwordValidator(password.value)
-        navigation.navigate('Root');
-        // if (emailError || passwordError || nameError) {
-        //     setName({ ...name, error: nameError })
-        //     setEmail({ ...email, error: emailError })
-        //     setPassword({ ...password, error: passwordError })
-        //     return
-        // }
-        //  await createUserWithEmailAndPassword(auth, email.value, password.value)
-        //     .then((userCredential) => {
-        //         // Signed in 
-        //         const user = userCredential.user;
-        //         console.log("Created" + userCredential.user);
-        //         navigation.navigate('Root');
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //         console.log("Error" + errorCode + errorMessage);
-        //     });
+        if (emailError || passwordError || nameError) {
+            setName({ ...name, error: nameError })
+            setEmail({ ...email, error: emailError })
+            setPassword({ ...password, error: passwordError })
+            return
+        }
+        await createUserWithEmailAndPassword(auth, email.value, password.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                navigation.navigate('Root');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("Error" + errorCode + errorMessage);
+            });
     }
 
     useEffect(
@@ -61,11 +60,8 @@ export default function RegisterScreen({ navigation }) {
     )
 
     return (
-        <View
-            style={styles.container}>
-            <ActivityIndicator animating={isLoading} size="large">
-                {!isLoading &&
-                <View>
+            <View
+                style={styles.container}>
                 <Image source={require('../assets/images/JOBEE.png')} style={{ width: 150, height: 150 }} resizeMode='contain' />
                 <Text style={styles.title}>Welcome to <Text style={styles.brand}>JoBee</Text></Text>
                 <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -116,12 +112,8 @@ export default function RegisterScreen({ navigation }) {
                     <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.link}>Login</Text>
                     </TouchableOpacity>
-                        </View>
-                        </View>
-
-                }
-            </ActivityIndicator>
-            </View>
+                </View>
+        </View>
     );
 }
 
