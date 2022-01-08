@@ -9,7 +9,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+
+
+import { ColorSchemeName, Pressable, ActivityIndicator } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -28,7 +30,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -62,6 +64,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator({ navigation }) {
   const colorScheme = useColorScheme();
+<<<<<<< HEAD
 
   const signOut = async () => {
     const auth = getAuth();
@@ -71,6 +74,8 @@ function BottomTabNavigator({ navigation }) {
     });
 
   }
+=======
+>>>>>>> 7c3dc5ee30382c8f58039f08f8ed9b2840145418
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
