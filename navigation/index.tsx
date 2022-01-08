@@ -68,7 +68,7 @@ function BottomTabNavigator({ navigation }) {
   const signOut = async () => {
     const auth = getAuth();
     await auth.signOut().then(() => {
-      navigation.navigate('Register')
+      navigation.replace('Login')
     });
 
   }
