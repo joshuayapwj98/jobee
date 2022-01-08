@@ -26,7 +26,6 @@ export default function SignInScreen({ navigation }) {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                console.log(user)
                 navigation.navigate('Root') // Navigate to another screen for user data entry
                 // ...
             })
