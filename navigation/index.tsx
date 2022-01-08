@@ -64,7 +64,6 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator({ navigation }) {
   const colorScheme = useColorScheme();
-<<<<<<< HEAD
 
   const signOut = async () => {
     const auth = getAuth();
@@ -74,8 +73,6 @@ function BottomTabNavigator({ navigation }) {
     });
 
   }
-=======
->>>>>>> 7c3dc5ee30382c8f58039f08f8ed9b2840145418
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
